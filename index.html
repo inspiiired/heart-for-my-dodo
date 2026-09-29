@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для любимой додо ❤</title>
+    <style>
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            font-family: monospace;
+            color: #ff4d6d;
+            font-size: 14px; 
+            white-space: pre;
+        }
+        #heart {
+            animation: beat 1.5s infinite;
+        }
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <div id="heart"></div>
+    <script>
+        const phrase = "Я сильно тебя люблю Надя ";
+        const heartElement = document.getElementById('heart');
+        const width = 40; 
+        const height = 15; 
+
+        function generateHeart() {
+            let output = "";
+            let index = 0;
+            for (let y = height; y >= -height; y--) {
+                for (let x = -width; x <= width; x++) {
+                    const nx = x / width * 1.6;
+                    const ny = y / height * 1.6;
+                    const eq = Math.pow(nx * nx + ny * ny - 1, 3) - nx * nx * Math.pow(ny, 3);
+                    if (eq <= 0) {
+                        output += phrase[index % phrase.length];
+                        index++;
+                    } else {
+                        output += " ";
+                    }
+                }
+                output += "\n";
+            }
+            return output;
+        }
+
+        heartElement.textContent = generateHeart();
+    </script>
+</body>
+</html>
